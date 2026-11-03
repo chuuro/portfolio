@@ -106,6 +106,7 @@ export default function App() {
                       <span>{p.period}</span>
                     </p>
                     <p className="project-desc">{p.desc}</p>
+                    {p.image && <img className="project-image" src={p.image.src} alt={p.image.alt} />}
                     <ul className="project-points">
                       {p.points.map((x) => (
                         <li key={x}>{x}</li>

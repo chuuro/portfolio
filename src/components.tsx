@@ -25,10 +25,28 @@ export function Tags({ items }: { items: string[] }) {
   )
 }
 
+export function CasePhotos({ photos }: { photos: Photo[] }) {
+  if (!photos.length) return null
+  const beside = photos.some((p) => p.fit === 'portrait' && p.layout !== 'below')
+  return (
+    <div className={beside ? 'case-photos split' : 'case-photos'}>
+      {photos.map((p) =>
+        p.fit === 'portrait' && beside ? (
+          <div className="portrait-frame" key={p.src}>
+            <img src={p.src} alt={p.alt} />
+          </div>
+        ) : (
+          <img key={p.src} className={p.fit === 'portrait' ? 'portrait' : p.fit === 'natural' ? 'natural' : 'crop'} src={p.src} alt={p.alt} />
+        ),
+      )}
+    </div>
+  )
+}
+
 export function CaseStudyItem({ c }: { c: CaseStudy }) {
   return (
     <article id={c.id} className="case">
-      <PhotoSlot photo={c.image} className="case-image" label="화면 캡처 또는 구성도" />
+      <CasePhotos photos={c.images} />
       <header className="case-head">
         <p className="case-meta">
           {c.company} <span className="dot">·</span> {c.period}

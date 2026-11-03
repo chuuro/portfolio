@@ -1,6 +1,10 @@
 export type Photo = {
   src: string
   alt: string
+  /** crop은 16:9로 채우고, natural은 원본 비율, portrait는 세로 화면 */
+  fit?: 'crop' | 'natural' | 'portrait'
+  /** portrait를 가로 사진 옆에 둘지, 아래에 둘지 */
+  layout?: 'beside' | 'below'
 }
 
 export type CaseStudy = {
@@ -11,7 +15,7 @@ export type CaseStudy = {
   period: string
   role: string
   tech: string[]
-  image: Photo
+  images: Photo[]
   flow: string[]
   problem: string[]
   options: string[]
@@ -26,6 +30,7 @@ export type Project = {
   points: string[]
   tech: string[]
   caseId?: string
+  image?: Photo
 }
 
 export type Career = {
@@ -91,10 +96,19 @@ export const caseStudies: CaseStudy[] = [
     period: '2026. 06 – 2026. 12',
     role: '사업 기능 개발·운영, 이용자 CS',
     tech: ['Java 17', 'Spring Boot', 'Spring Cloud', 'JPA', 'React', 'TypeScript', 'MySQL', 'Docker', 'GitLab', 'Jenkins'],
-    image: {
-      src: '/photos/kdata.jpg',
-      alt: 'AI·데이터 문제해결은행 홈. 데이터 레시피, 워크 스튜디오, 활용사례가 보이는 공개 포털 화면.',
-    },
+    images: [
+      {
+        src: '/photos/portal-home.jpg',
+        alt: 'AI·데이터 문제해결은행 홈. 데이터 레시피, 워크 스튜디오, AX전문가 지원, 공유 인사이트가 한 화면에 있음.',
+        fit: 'crop',
+      },
+      {
+        src: '/photos/portal-poster.jpg',
+        alt: '2026 데이터+AI 혁신 챌린지 통합경진대회 데이터 문제해결 부문 공고.',
+        fit: 'portrait',
+        layout: 'beside',
+      },
+    ],
     flow: ['사업 공고', '참가 신청', '레시피 작성', '최종 제출 검증', '관리자 검토'],
     problem: [
       '경진대회·맞춤지원 등 사업마다 신청 항목이 해마다 달라짐',
@@ -126,10 +140,18 @@ export const caseStudies: CaseStudy[] = [
     period: '2024. 07 – 2025. 09',
     role: '업로드·변환 화면 및 서버 개발',
     tech: ['PHP Laravel', 'Vue.js 3', 'TypeScript', 'Inertia.js', 'Redis Queue', 'SSE', 'Tus', 'Oracle'],
-    image: {
-      src: '/photos/mbc-nps.jpg?v=3',
-      alt: 'MBC NPS 검색 화면. 영상 목록과 미리보기가 격자로 보이는 인제스트 결과.',
-    },
+    images: [
+      {
+        src: '/photos/mbc-nps.jpg?v=4',
+        alt: 'MBC NPS 미디어 검색. 보도영상 미리보기가 격자로 보임.',
+        fit: 'crop',
+      },
+      {
+        src: '/photos/mbc-detail.jpg',
+        alt: 'NPS 영상을 편집기에서 연 상세 화면.',
+        fit: 'natural',
+      },
+    ],
     flow: ['브라우저', 'Tus 분할 업로드', '원본 저장', 'Redis 큐', '변환 워커', 'SSE로 진행률 전달'],
     problem: [
       '대용량 원본 파일이 네트워크가 한 번 끊기면 처음부터 다시 업로드됨',
@@ -156,10 +178,13 @@ export const caseStudies: CaseStudy[] = [
     period: '2024. 04 – 2024. 05',
     role: '항공사 연동 및 통합 조회 API 개발',
     tech: ['Java', 'Spring Framework', 'CompletableFuture', 'Oracle'],
-    image: {
-      src: '/photos/hyundai.jpg',
-      alt: '현대트레블 인천-도쿄 왕복 조회. 대한항공·제주항공 결과와 함께 항공사직판 배지가 붙은 운임이 같은 목록에 있음.',
-    },
+    images: [
+      {
+        src: '/photos/hyundai.jpg?v=4',
+        alt: '현대트레블 인천-도쿄 왕복 조회. 제주항공 운임과 항공사직판 배지가 같은 목록에 있음.',
+        fit: 'crop',
+      },
+    ],
     flow: ['조회 요청', '항공사별 어댑터 동시 호출', '타임아웃 넘은 항공사 제외', '공통 운임 모델로 병합', '응답'],
     problem: [
       '여행사 예약 시스템(토파스)에 제주항공·진에어 등 LCC 운임을 GDS(아마데우스)를 거치지 않고 직접 붙여야 함',
@@ -185,10 +210,19 @@ export const caseStudies: CaseStudy[] = [
     period: '2022. 07 – 2023. 11',
     role: '발송 Agent·배치 개발 및 운영',
     tech: ['Java', 'Spring Boot', 'Spring Batch', 'JPA', 'Vue.js 2', 'Oracle', 'Docker'],
-    image: {
-      src: '/photos/kb-flow.png',
-      alt: '전자문서 발송 흐름. 대상 추출, 배치, 공인전자문서 중계, 앱 Push, 실패 건 재시도. 같은 문서는 한 번만 발송.',
-    },
+    images: [
+      {
+        src: '/photos/kb-structure.png',
+        alt: '전자문서 유통 구조. 기관 연계 에이전트, 중계시스템, KISA 유통 허브, 이용자 모바일.',
+        fit: 'crop',
+      },
+      {
+        src: '/photos/kb-app.jpg',
+        alt: '공공알리미 받은 문서 화면. KB증권과 KB국민카드 전자문서가 모여 있음.',
+        fit: 'portrait',
+        layout: 'below',
+      },
+    ],
     flow: ['발송 대상 추출', '청크 단위 문서 생성', 'KISA 중계 / 앱 Push', '결과 저장', '실패 건 재시도'],
     problem: [
       '손보·캐피탈 등 계열사마다 OS·JDK 버전이 달라 같은 Agent가 다르게 동작',
@@ -310,6 +344,11 @@ export const careers: Career[] = [
         desc: '고객 대상 마케팅 캠페인의 타겟 추출 및 메시지 발송 플랫폼',
         points: ['조건 모듈화와 실행 계획 기반 튜닝으로 타겟 추출 20분 → 3분', '알림톡 실패 건 문자 자동 대체 발송'],
         tech: ['Java', 'Spring', 'MyBatis', 'Oracle'],
+        image: {
+          src: '/photos/lotte.jpg',
+          alt: '롯데마트 캠페인 화면. 타겟팅, 상품 추천 설정, 채널 발송이 한 흐름으로 이어짐.',
+          fit: 'crop',
+        },
       },
       {
         name: '대한항공 · LX판토스 · 두산인프라코어',
