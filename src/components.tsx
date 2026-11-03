@@ -1,16 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import type { CaseStudy, Photo } from './data'
 
-export function PhotoSlot({ photo, className, label }: { photo: Photo; className?: string; label?: string }) {
-  if (photo.src) {
-    return <img className={className} src={photo.src} alt={photo.alt} loading="lazy" />
-  }
-  return (
-    <div className={`photo-empty ${className ?? ''}`} role="img" aria-label={photo.alt}>
-      <span className="photo-empty-label">{label ?? '사진'}</span>
-      <span className="photo-empty-alt">{photo.alt}</span>
-    </div>
-  )
+export function PhotoSlot({ photo, className }: { photo: Photo; className?: string; label?: string }) {
+  if (!photo.src) return null
+  return <img className={className} src={photo.src} alt={photo.alt} loading="lazy" />
 }
 
 export function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {

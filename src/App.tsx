@@ -5,12 +5,10 @@ import {
   competencies,
   education,
   intro,
-  introPhoto,
   keywords,
   profile,
   skills,
   stats,
-  workPhotos,
   workStyle,
 } from './data'
 
@@ -69,7 +67,6 @@ export default function App() {
                 <p key={p.slice(0, 12)}>{p}</p>
               ))}
             </div>
-            <PhotoSlot photo={introPhoto} className="intro-photo" label="작업 사진" />
           </div>
           <ul className="keywords">
             {keywords.map((k) => (
@@ -164,11 +161,6 @@ export default function App() {
                 <h3>{w.title}</h3>
                 <p>{w.body}</p>
               </div>
-            ))}
-          </div>
-          <div className="work-photos">
-            {workPhotos.map((p, i) => (
-              <PhotoSlot key={i} photo={p} className="work-photo" label="일하는 모습" />
             ))}
           </div>
         </Section>
