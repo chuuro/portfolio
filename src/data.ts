@@ -46,7 +46,7 @@ export const profile = {
   resumePdf: '/resume.pdf',
   updated: '2026. 10',
   photo: {
-    src: '/photos/profile.jpg',
+    src: '/photos/profile.jpg?v=2',
     alt: '계곡가에서 선글라스를 쓰고 뒤를 돌아본 상반신. 흰 셔츠.',
   } satisfies Photo,
 }
@@ -127,7 +127,7 @@ export const caseStudies: CaseStudy[] = [
     role: '업로드·변환 화면 및 서버 개발',
     tech: ['PHP Laravel', 'Vue.js 3', 'TypeScript', 'Inertia.js', 'Redis Queue', 'SSE', 'Tus', 'Oracle'],
     image: {
-      src: '/photos/mbc-nps.jpg',
+      src: '/photos/mbc-nps.jpg?v=2',
       alt: 'MBC NPS 검색 화면. 영상 목록과 미리보기가 격자로 보이는 인제스트 결과.',
     },
     flow: ['브라우저', 'Tus 분할 업로드', '원본 저장', 'Redis 큐', '변환 워커', 'SSE로 진행률 전달'],
